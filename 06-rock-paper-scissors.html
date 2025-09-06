@@ -37,6 +37,13 @@
         font-size: 15px;
         cursor: pointer;
       }
+      .auto-btn {
+        background-color: #fff;
+        border: none;
+        padding: 8px 15px;
+        font-size: 15px;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -69,7 +76,7 @@
     >
       Reset score
     </button>
-    <button>Auto Play</button>
+    <button class="auto-btn" onclick="autoPlay()">Auto Play</button>
     <script>
       let score = JSON.parse(localStorage.getItem("score")) || {
         wins: 0,
@@ -77,6 +84,21 @@
         ties: 0,
       };
 
+      let isAutoPlaying = false;
+      let intervalID = '';
+
+      function autoPlay(){
+        if(!isAutoPlaying){
+         intervalID = setInterval(() => {
+            const playerMove = playComputerMove();
+            playGame(playerMove);
+            isAutoPlaying = true
+          }, 1000)
+        }else {
+          clearInterval(intervalID);
+          isAutoPlaying = false;
+        }
+      }
       function playComputerMove() {
         let randomNumber = Math.random();
         let computerMove = "";
