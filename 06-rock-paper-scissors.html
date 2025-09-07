@@ -84,6 +84,9 @@
         wins: 0,
         losses: 0,
         ties: 0,
+        games: 0,
+        currentStreak: 0,
+        bestStreak: 0,
       };
 
       updateScoreElement();
@@ -176,16 +179,16 @@
       }
 
       function updateScoreElement() {
-        let winStreak =
+        let winRate =
           score.games > 0 ? ((score.wins / score.games) * 100).toFixed(1) : 0;
 
         document.querySelector(".js-score").innerHTML = `
           Wins: ${score.wins},
           Losses: ${score.losses},
-          Ties: ${score.ties},
-          Games Played: ${score.games}
-          Win Rate: ${winRate}%
-          currentStreak: ${score.currentStreak}
+          Ties: ${score.ties}<br>
+          Games Played: ${score.games}<br>
+          Win Rate: ${winRate}%<br>
+          currentStreak: ${score.currentStreak}<br>
           Best Streak: ${score.bestStreak}
           `;
       }
